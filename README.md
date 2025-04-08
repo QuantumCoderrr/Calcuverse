@@ -19,11 +19,15 @@ Welcome to **Calcuverse** — a stylish, powerful, and user-friendly calculator 
 
 ---
 
-## 📷 Screenshot
+## 🎨 UI Themes (Light & Dark Mode)
+<p align="center">
+  <img src="screenshots/white-normal.png" alt="Light Mode" width="300"/>
+  &nbsp;&nbsp;
+  <img src="screenshots/black-scientific.png" alt="Dark Mode" width="300"/>
+</p>
 
-![screenshot](screenshots/demo-darkmode.png)
-
----
+### 🎥 Demo (20s)
+![Demo](screenshots/demo.gif)
 
 ## 📦 Requirements
 
