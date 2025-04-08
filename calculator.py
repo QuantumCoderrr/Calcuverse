@@ -11,7 +11,7 @@ class Calculator(tk.Tk):
     def __init__(self):
         super().__init__()
 
-        self.title("🧮 Scientific Calculator")
+        self.title("🧮 Calcuverse - Scientific Calculator")
         self.geometry("420x600")
         self.resizable(False, False)
 
@@ -53,6 +53,7 @@ class Calculator(tk.Tk):
         # History display
         self.history_box = tk.Listbox(self, height=4, font=("Courier", 12), bg=self.bg_color(), fg="#8ef6e4")
         self.history_box.pack(pady=5, fill="x")
+        self.history_box.insert(tk.END, "Welcome to Calcuverse!")
 
         self.create_buttons()
 
@@ -94,10 +95,11 @@ class Calculator(tk.Tk):
                 self.buttons[char] = btn
 
     def update_mode(self):
-        if self.mode.get() == "Scientific":
-            self.sci_frame.grid(row=5, column=0, columnspan=5)
-        else:
-            self.sci_frame.grid_forget()
+        if hasattr(self, 'sci_frame'):
+            if self.mode.get() == "Scientific":
+                self.sci_frame.grid(row=5, column=0, columnspan=5)
+            else:
+                self.sci_frame.grid_forget()
 
     def toggle_theme(self):
         bg = self.bg_color()
@@ -112,6 +114,7 @@ class Calculator(tk.Tk):
 
     def on_button_click(self, char):
         if char == "=":
+            self.auto_close_brackets()
             self.calculate()
         elif char == "C":
             self.expression = ""
@@ -159,6 +162,13 @@ class Calculator(tk.Tk):
         except Exception as e:
             self.input_text.set("Unexpected Error")
             self.expression = ""
+
+    def auto_close_brackets(self):
+        open_count = self.expression.count("(")
+        close_count = self.expression.count(")")
+        while close_count < open_count:
+            self.expression += ")"
+            close_count += 1
 
     def update_history(self):
         self.history_box.delete(0, tk.END)
